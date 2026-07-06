@@ -1,0 +1,144 @@
+package com.htonmapper.core;
+
+import java.util.HashMap;
+import java.util.Map;
+
+public class ServiceLookup {
+
+    private static final Map<Integer, String> KnownServiceMap = BuildServiceMap();
+
+    private static Map<Integer, String> BuildServiceMap() {
+        Map<Integer, String> ServiceMapArg = new HashMap<>();
+        ServiceMapArg.put(20, "FTP-DATA");
+        ServiceMapArg.put(21, "FTP");
+        ServiceMapArg.put(22, "SSH");
+        ServiceMapArg.put(23, "TELNET");
+        ServiceMapArg.put(25, "SMTP");
+        ServiceMapArg.put(37, "TIME");
+        ServiceMapArg.put(42, "NAMESERVER");
+        ServiceMapArg.put(43, "WHOIS");
+        ServiceMapArg.put(49, "TACACS");
+        ServiceMapArg.put(53, "DNS");
+        ServiceMapArg.put(67, "DHCP-SERVER");
+        ServiceMapArg.put(68, "DHCP-CLIENT");
+        ServiceMapArg.put(69, "TFTP");
+        ServiceMapArg.put(70, "GOPHER");
+        ServiceMapArg.put(79, "FINGER");
+        ServiceMapArg.put(80, "HTTP");
+        ServiceMapArg.put(88, "KERBEROS");
+        ServiceMapArg.put(109, "POP2");
+        ServiceMapArg.put(110, "POP3");
+        ServiceMapArg.put(111, "RPCBIND");
+        ServiceMapArg.put(113, "IDENT");
+        ServiceMapArg.put(119, "NNTP");
+        ServiceMapArg.put(123, "NTP");
+        ServiceMapArg.put(135, "MSRPC");
+        ServiceMapArg.put(137, "NETBIOS-NS");
+        ServiceMapArg.put(138, "NETBIOS-DGM");
+        ServiceMapArg.put(139, "NETBIOS-SSN");
+        ServiceMapArg.put(143, "IMAP");
+        ServiceMapArg.put(161, "SNMP");
+        ServiceMapArg.put(162, "SNMP-TRAP");
+        ServiceMapArg.put(179, "BGP");
+        ServiceMapArg.put(194, "IRC");
+        ServiceMapArg.put(389, "LDAP");
+        ServiceMapArg.put(427, "SLP");
+        ServiceMapArg.put(443, "HTTPS");
+        ServiceMapArg.put(444, "SNPP");
+        ServiceMapArg.put(445, "SMB");
+        ServiceMapArg.put(464, "KPASSWD");
+        ServiceMapArg.put(465, "SMTPS");
+        ServiceMapArg.put(497, "RETROSPECT");
+        ServiceMapArg.put(500, "ISAKMP");
+        ServiceMapArg.put(512, "REXEC");
+        ServiceMapArg.put(513, "RLOGIN");
+        ServiceMapArg.put(514, "SYSLOG");
+        ServiceMapArg.put(515, "PRINTER");
+        ServiceMapArg.put(520, "RIP");
+        ServiceMapArg.put(521, "RIPNG");
+        ServiceMapArg.put(540, "UUCP");
+        ServiceMapArg.put(548, "AFP");
+        ServiceMapArg.put(554, "RTSP");
+        ServiceMapArg.put(587, "SUBMISSION");
+        ServiceMapArg.put(591, "FILEMAKER");
+        ServiceMapArg.put(593, "HTTP-RPC");
+        ServiceMapArg.put(631, "IPP");
+        ServiceMapArg.put(636, "LDAPS");
+        ServiceMapArg.put(646, "LDP");
+        ServiceMapArg.put(873, "RSYNC");
+        ServiceMapArg.put(902, "VMWARE-AUTH");
+        ServiceMapArg.put(989, "FTPS-DATA");
+        ServiceMapArg.put(990, "FTPS");
+        ServiceMapArg.put(993, "IMAPS");
+        ServiceMapArg.put(995, "POP3S");
+        ServiceMapArg.put(1080, "SOCKS");
+        ServiceMapArg.put(1194, "OPENVPN");
+        ServiceMapArg.put(1433, "MSSQL");
+        ServiceMapArg.put(1434, "MSSQL-MONITOR");
+        ServiceMapArg.put(1521, "ORACLE");
+        ServiceMapArg.put(1701, "L2TP");
+        ServiceMapArg.put(1723, "PPTP");
+        ServiceMapArg.put(1812, "RADIUS");
+        ServiceMapArg.put(1883, "MQTT");
+        ServiceMapArg.put(2049, "NFS");
+        ServiceMapArg.put(2082, "CPANEL");
+        ServiceMapArg.put(2083, "CPANEL-SSL");
+        ServiceMapArg.put(2181, "ZOOKEEPER");
+        ServiceMapArg.put(2222, "DIRECTADMIN");
+        ServiceMapArg.put(2375, "DOCKER");
+        ServiceMapArg.put(2376, "DOCKER-SSL");
+        ServiceMapArg.put(27017, "MONGODB");
+        ServiceMapArg.put(27018, "MONGODB-SHARD");
+        ServiceMapArg.put(3000, "DEV-SERVER");
+        ServiceMapArg.put(3128, "SQUID-PROXY");
+        ServiceMapArg.put(3268, "GLOBAL-CATALOG");
+        ServiceMapArg.put(3306, "MYSQL");
+        ServiceMapArg.put(3389, "RDP");
+        ServiceMapArg.put(3690, "SVN");
+        ServiceMapArg.put(4369, "ERLANG-EPMD");
+        ServiceMapArg.put(4444, "METASPLOIT");
+        ServiceMapArg.put(4500, "IPSEC-NAT-T");
+        ServiceMapArg.put(5000, "UPNP");
+        ServiceMapArg.put(5060, "SIP");
+        ServiceMapArg.put(5061, "SIP-TLS");
+        ServiceMapArg.put(5222, "XMPP");
+        ServiceMapArg.put(5353, "MDNS");
+        ServiceMapArg.put(5432, "POSTGRESQL");
+        ServiceMapArg.put(5601, "KIBANA");
+        ServiceMapArg.put(5672, "AMQP");
+        ServiceMapArg.put(5900, "VNC");
+        ServiceMapArg.put(5984, "COUCHDB");
+        ServiceMapArg.put(6379, "REDIS");
+        ServiceMapArg.put(6443, "KUBERNETES-API");
+        ServiceMapArg.put(6660, "IRC-ALT");
+        ServiceMapArg.put(6667, "IRC-ALT2");
+        ServiceMapArg.put(7001, "WEBLOGIC");
+        ServiceMapArg.put(7077, "SPARK");
+        ServiceMapArg.put(8000, "HTTP-ALT");
+        ServiceMapArg.put(8006, "PROXMOX");
+        ServiceMapArg.put(8080, "HTTP-PROXY");
+        ServiceMapArg.put(8081, "HTTP-ALT2");
+        ServiceMapArg.put(8443, "HTTPS-ALT");
+        ServiceMapArg.put(8500, "CONSUL");
+        ServiceMapArg.put(8600, "CONSUL-DNS");
+        ServiceMapArg.put(8888, "JUPYTER");
+        ServiceMapArg.put(9000, "PHP-FPM");
+        ServiceMapArg.put(9090, "PROMETHEUS");
+        ServiceMapArg.put(9092, "KAFKA");
+        ServiceMapArg.put(9200, "ELASTICSEARCH");
+        ServiceMapArg.put(9300, "ELASTICSEARCH-NODE");
+        ServiceMapArg.put(11211, "MEMCACHED");
+        ServiceMapArg.put(15672, "RABBITMQ-MGMT");
+        ServiceMapArg.put(27019, "MONGODB-CONFIG");
+        ServiceMapArg.put(50000, "SAP");
+        return ServiceMapArg;
+    }
+
+    public static String ResolveServiceName(int PortNumberArg) {
+        String ResolvedName = KnownServiceMap.get(PortNumberArg);
+        if (ResolvedName == null) {
+            return "UNKNOWN";
+        }
+        return ResolvedName;
+    }
+}
