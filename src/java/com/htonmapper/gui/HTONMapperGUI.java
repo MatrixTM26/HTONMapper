@@ -1,7 +1,6 @@
 package com.htonmapper.gui;
 
 import com.htonmapper.core.ScannerEngine;
-
 import java.awt.BorderLayout;
 import java.awt.CardLayout;
 import javax.swing.JPanel;
@@ -65,17 +64,7 @@ public class HTONMapperGUI {
         LogViewInstance.ClearLog();
         HandleNavigate("Log");
 
-        EngineInstance.StartScan(
-                HostValue,
-                StartPortValue,
-                EndPortValue,
-                TimeoutValue,
-                ThreadValue,
-                ResultsViewInstance::AddResultRow,
-                ScannerViewInstance.GetProgressIndicator()::UpdatePercentValue,
-                this::HandleScanComplete,
-                LogViewInstance::AppendLogMessage
-        );
+        EngineInstance.StartScan(HostValue, StartPortValue, EndPortValue, TimeoutValue, ThreadValue, ResultsViewInstance::AddResultRow, ScannerViewInstance.GetProgressIndicator()::UpdatePercentValue, this::HandleScanComplete, LogViewInstance::AppendLogMessage);
     }
 
     private void HandleStopScan() {

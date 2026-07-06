@@ -1,9 +1,9 @@
 package com.htonmapper.gui;
 
-import javax.swing.JTextField;
-import javax.swing.border.LineBorder;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
+import javax.swing.JTextField;
+import javax.swing.border.LineBorder;
 
 public class HTONMapperTextField extends JTextField {
 
@@ -23,16 +23,18 @@ public class HTONMapperTextField extends JTextField {
     }
 
     private void AttachFocusBehavior() {
-        addFocusListener(new FocusAdapter() {
-            @Override
-            public void focusGained(FocusEvent EventArg) {
-                setBorder(new LineBorder(HTONMapperTheme.ColorSoftBlue, 1));
-            }
+        addFocusListener(
+            new FocusAdapter() {
+                @Override
+                public void focusGained(FocusEvent EventArg) {
+                    setBorder(new LineBorder(HTONMapperTheme.ColorSoftBlue, 1));
+                }
 
-            @Override
-            public void focusLost(FocusEvent EventArg) {
-                setBorder(new LineBorder(HTONMapperTheme.ColorBorderDefault, 1));
+                @Override
+                public void focusLost(FocusEvent EventArg) {
+                    setBorder(new LineBorder(HTONMapperTheme.ColorBorderDefault, 1));
+                }
             }
-        });
+        );
     }
 }

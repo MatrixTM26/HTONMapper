@@ -1,13 +1,13 @@
 package com.htonmapper.gui;
 
-import javax.swing.SwingUtilities;
-import javax.swing.border.EmptyBorder;
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.util.function.BiConsumer;
+import javax.swing.SwingUtilities;
+import javax.swing.border.EmptyBorder;
 
 public class HTONMapperScannerView extends HTONMapperPanel {
 
@@ -150,7 +150,7 @@ public class HTONMapperScannerView extends HTONMapperPanel {
             }
 
             SetScanningState(true);
-            OnStartScan.accept(HostValue, new int[]{StartPortValue, EndPortValue, TimeoutValue, ThreadValue});
+            OnStartScan.accept(HostValue, new int[] { StartPortValue, EndPortValue, TimeoutValue, ThreadValue });
         } catch (NumberFormatException ExceptionArg) {
             StatusLabel.setText("Invalid numeric input");
             StatusLabel.setForeground(HTONMapperTheme.ColorSoftRed);

@@ -1,7 +1,7 @@
 package com.htonmapper.gui;
 
-import javax.swing.JLabel;
 import java.awt.Color;
+import javax.swing.JLabel;
 
 public class HTONMapperLabel extends JLabel {
 

@@ -1,10 +1,10 @@
 package com.htonmapper.gui;
 
+import java.awt.LayoutManager;
 import javax.swing.JPanel;
 import javax.swing.border.CompoundBorder;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
-import java.awt.LayoutManager;
 
 public class HTONMapperPanel extends JPanel {
 
@@ -19,10 +19,7 @@ public class HTONMapperPanel extends JPanel {
     }
 
     public HTONMapperPanel SetCardStyle() {
-        setBorder(new CompoundBorder(
-                new LineBorder(HTONMapperTheme.ColorBorderDefault, 1),
-                new EmptyBorder(14, 16, 14, 16)
-        ));
+        setBorder(new CompoundBorder(new LineBorder(HTONMapperTheme.ColorBorderDefault, 1), new EmptyBorder(14, 16, 14, 16)));
         return this;
     }
 

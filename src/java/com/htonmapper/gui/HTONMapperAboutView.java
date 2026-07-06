@@ -1,9 +1,9 @@
 package com.htonmapper.gui;
 
+import java.awt.Component;
 import javax.swing.BoxLayout;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
-import java.awt.Component;
 
 public class HTONMapperAboutView extends HTONMapperPanel {
 
@@ -29,9 +29,7 @@ public class HTONMapperAboutView extends HTONMapperPanel {
 
         InfoCard.add(BuildInfoLine("Engine", "Java Socket TCP Connect Scan"));
         InfoCard.add(BuildInfoLine("Platform", "Windows / Linux"));
-        InfoCard.add(BuildInfoLine("Author", "Teuku Maulana"));
-        InfoCard.add(BuildInfoLine("Certification", "Certified Ethical Hacker (CEH)"));
-        InfoCard.add(BuildInfoLine("Affiliation", "DISKOMINFO Aceh Selatan"));
+        InfoCard.add(BuildInfoLine("Author", "MatrixTM26"));
 
         HTONMapperLabel NoticeLabel = new HTONMapperLabel("Use only on networks you own or are authorized to test.");
         NoticeLabel.SetSmallStyle();
