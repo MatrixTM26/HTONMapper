@@ -15,42 +15,7 @@ This tool performs TCP connect scanning through the standard Java `Socket` API. 
 - Percentage based progress bar updated per completed port
 - Activity log with timestamps
 - Service name resolution for around 100 common ports
-- GitHub dark themed GUI with a collapsible sidebar and burger toggle
-- Custom Swing component subclasses under `com.htonmapper.gui`
 
-## Project Structure
-
-```
-HTONMapper/
-├── build.sh
-├── run.sh
-├── README.md
-└── src/
-    └── java/
-        └── com/
-            └── htonmapper/
-                ├── Main.java
-                ├── core/
-                │   ├── ScannerEngine.java
-                │   ├── ServiceLookup.java
-                │   └── PortResult.java
-                └── gui/
-                    ├── HTONMapperTheme.java
-                    ├── HTONMapperFrame.java
-                    ├── HTONMapperPanel.java
-                    ├── HTONMapperLabel.java
-                    ├── HTONMapperButton.java
-                    ├── HTONMapperTextField.java
-                    ├── HTONMapperTable.java
-                    ├── HTONMapperProgressBar.java
-                    ├── HTONMapperTitleBar.java
-                    ├── HTONMapperSidebar.java
-                    ├── HTONMapperScannerView.java
-                    ├── HTONMapperResultsView.java
-                    ├── HTONMapperLogView.java
-                    ├── HTONMapperAboutView.java
-                    └── HTONMapperGUI.java
-```
 
 ## Requirements
 
@@ -122,6 +87,5 @@ Only scan hosts and networks you own or are explicitly authorized to test. Unaut
 
 ## Author
 
-Teuku Maulana
-Offensive Security / Red Teaming, DISKOMINFO Aceh Selatan
-Certified Ethical Hacker (CEH)
+- [MatrixTM26](https://github.com/MatrixTM26)
+- [AGPL-V3 License](./LICENSE)
