@@ -16,7 +16,6 @@ This tool performs TCP connect scanning through the standard Java `Socket` API. 
 - Activity log with timestamps
 - Service name resolution for around 100 common ports
 
-
 ## Requirements
 
 - JDK 8 or newer (a full JDK, not just a JRE, since `javac` is required to build)
@@ -85,7 +84,10 @@ java com.htonmapper.Main
 
 Only scan hosts and networks you own or are explicitly authorized to test. Unauthorized port scanning may violate laws or terms of service depending on your jurisdiction and the target network's policies.
 
-## Author
+## Credit
 
 - [MatrixTM26](https://github.com/MatrixTM26)
 - [AGPL-V3 License](./LICENSE)
+
+> [!CAUTION]
+> This tool is currently under development, in some release versions, you may encounter functional errors or logic flaws.
