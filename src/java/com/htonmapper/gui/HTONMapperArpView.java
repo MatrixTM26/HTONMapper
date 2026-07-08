@@ -1,15 +1,14 @@
 package com.htonmapper.gui;
 
 import com.htonmapper.core.ArpTableEngine;
-
+import java.awt.BorderLayout;
+import java.awt.FlowLayout;
+import java.util.function.Consumer;
 import javax.swing.JScrollPane;
 import javax.swing.SwingUtilities;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 import javax.swing.table.DefaultTableModel;
-import java.awt.BorderLayout;
-import java.awt.FlowLayout;
-import java.util.function.Consumer;
 
 public class HTONMapperArpView extends HTONMapperPanel {
 
@@ -48,7 +47,7 @@ public class HTONMapperArpView extends HTONMapperPanel {
         ControlRow.add(ButtonWrap, BorderLayout.WEST);
         ControlRow.add(CountLabel, BorderLayout.EAST);
 
-        String[] ColumnNames = {"IP Address", "MAC Address", "Interface", "Type / State"};
+        String[] ColumnNames = { "IP Address", "MAC Address", "Interface", "Type / State" };
         TableModel = new DefaultTableModel(ColumnNames, 0) {
             @Override
             public boolean isCellEditable(int RowArg, int ColumnArg) {
@@ -73,14 +72,13 @@ public class HTONMapperArpView extends HTONMapperPanel {
         TableModel.setRowCount(0);
 
         EngineInstance.ReadLocalArpTable(
-                EntryArg -> SwingUtilities.invokeLater(() -> {
-                    TableModel.addRow(new Object[]{
-                            EntryArg.GetIpAddress(), EntryArg.GetMacAddress(), EntryArg.GetInterfaceName(), EntryArg.GetEntryType()
-                    });
+            EntryArg ->
+                SwingUtilities.invokeLater(() -> {
+                    TableModel.addRow(new Object[] { EntryArg.GetIpAddress(), EntryArg.GetMacAddress(), EntryArg.GetInterfaceName(), EntryArg.GetEntryType() });
                     CountLabel.setText(TableModel.getRowCount() + " entries");
                 }),
-                () -> SwingUtilities.invokeLater(() -> RefreshButton.setEnabled(true)),
-                OnLogMessage
+            () -> SwingUtilities.invokeLater(() -> RefreshButton.setEnabled(true)),
+            OnLogMessage
         );
     }
 }

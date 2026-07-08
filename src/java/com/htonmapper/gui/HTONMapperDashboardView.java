@@ -1,7 +1,5 @@
 package com.htonmapper.gui;
 
-import javax.swing.BoxLayout;
-import javax.swing.border.EmptyBorder;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -9,6 +7,8 @@ import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.BoxLayout;
+import javax.swing.border.EmptyBorder;
 
 public class HTONMapperDashboardView extends HTONMapperPanel {
 

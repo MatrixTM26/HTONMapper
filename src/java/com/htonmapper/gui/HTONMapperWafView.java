@@ -1,12 +1,11 @@
 package com.htonmapper.gui;
 
 import com.htonmapper.core.WafDetectionEngine;
-
-import javax.swing.SwingUtilities;
-import javax.swing.border.EmptyBorder;
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import java.util.function.Consumer;
+import javax.swing.SwingUtilities;
+import javax.swing.border.EmptyBorder;
 
 public class HTONMapperWafView extends HTONMapperPanel {
 
@@ -103,9 +102,10 @@ public class HTONMapperWafView extends HTONMapperPanel {
         StatusLabel.setForeground(HTONMapperTheme.ColorTextMuted);
 
         EngineInstance.DetectWaf(
-                UrlValue,
-                5000,
-                ResultArg -> SwingUtilities.invokeLater(() -> {
+            UrlValue,
+            5000,
+            ResultArg ->
+                SwingUtilities.invokeLater(() -> {
                     DetectionValue.setText(ResultArg.GetIsWafDetected() ? "Yes" : "No");
                     DetectionValue.setForeground(ResultArg.GetIsWafDetected() ? HTONMapperTheme.ColorSoftYellow : HTONMapperTheme.ColorSoftGreen);
                     VendorValue.setText(ResultArg.GetWafVendorName());
@@ -114,12 +114,13 @@ public class HTONMapperWafView extends HTONMapperPanel {
                     StatusLabel.setForeground(HTONMapperTheme.ColorSoftGreen);
                     ScanButton.setEnabled(true);
                 }),
-                FailureMessage -> SwingUtilities.invokeLater(() -> {
+            FailureMessage ->
+                SwingUtilities.invokeLater(() -> {
                     StatusLabel.setText("Probe failed: " + FailureMessage);
                     StatusLabel.setForeground(HTONMapperTheme.ColorSoftRed);
                     ScanButton.setEnabled(true);
                 }),
-                OnLogMessage
+            OnLogMessage
         );
     }
 }

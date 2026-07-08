@@ -9,8 +9,7 @@ import java.util.function.Consumer;
 
 public class WafDetectionEngine {
 
-    public void DetectWaf(String TargetUrl, int TimeoutMs, Consumer<WafDetectionResult> OnDetectionResult,
-                          Consumer<String> OnScanFailed, Consumer<String> OnLogMessage) {
+    public void DetectWaf(String TargetUrl, int TimeoutMs, Consumer<WafDetectionResult> OnDetectionResult, Consumer<String> OnScanFailed, Consumer<String> OnLogMessage) {
         Thread ScanThread = new Thread(() -> {
             OnLogMessage.accept("[*] Probing " + TargetUrl + " for WAF signatures");
             try {

@@ -1,14 +1,13 @@
 package com.htonmapper.gui;
 
 import com.htonmapper.core.PortResult;
-
+import java.awt.BorderLayout;
+import java.util.concurrent.atomic.AtomicInteger;
 import javax.swing.JScrollPane;
 import javax.swing.SwingUtilities;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 import javax.swing.table.DefaultTableModel;
-import java.awt.BorderLayout;
-import java.util.concurrent.atomic.AtomicInteger;
 
 public class HTONMapperResultsView extends HTONMapperPanel {
 
@@ -35,7 +34,7 @@ public class HTONMapperResultsView extends HTONMapperPanel {
         HeadingPanel.add(TitleLabel, BorderLayout.WEST);
         HeadingPanel.add(CountLabel, BorderLayout.EAST);
 
-        String[] ColumnNames = {"Port", "Status", "Service", "Response Time (ms)"};
+        String[] ColumnNames = { "Port", "Status", "Service", "Response Time (ms)" };
         TableModel = new DefaultTableModel(ColumnNames, 0) {
             @Override
             public boolean isCellEditable(int RowArg, int ColumnArg) {
@@ -55,12 +54,7 @@ public class HTONMapperResultsView extends HTONMapperPanel {
 
     public void AddResultRow(PortResult ResultArg) {
         SwingUtilities.invokeLater(() -> {
-            TableModel.addRow(new Object[]{
-                    ResultArg.GetPortNumber(),
-                    ResultArg.GetPortStatus(),
-                    ResultArg.GetServiceName(),
-                    ResultArg.GetResponseTimeMs()
-            });
+            TableModel.addRow(new Object[] { ResultArg.GetPortNumber(), ResultArg.GetPortStatus(), ResultArg.GetServiceName(), ResultArg.GetResponseTimeMs() });
             UpdateStatusCounter(ResultArg.GetPortStatus());
             RefreshCountLabel();
         });

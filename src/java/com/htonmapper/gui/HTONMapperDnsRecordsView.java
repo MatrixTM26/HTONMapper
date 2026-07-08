@@ -1,15 +1,14 @@
 package com.htonmapper.gui;
 
 import com.htonmapper.core.DnsLookupEngine;
-
+import java.awt.BorderLayout;
+import java.awt.FlowLayout;
+import java.util.function.Consumer;
 import javax.swing.JScrollPane;
 import javax.swing.SwingUtilities;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 import javax.swing.table.DefaultTableModel;
-import java.awt.BorderLayout;
-import java.awt.FlowLayout;
-import java.util.function.Consumer;
 
 public class HTONMapperDnsRecordsView extends HTONMapperPanel {
 
@@ -52,7 +51,7 @@ public class HTONMapperDnsRecordsView extends HTONMapperPanel {
         StatusLabel.SetSmallStyle();
         StatusLabel.setBorder(new EmptyBorder(8, 0, 8, 0));
 
-        String[] ColumnNames = {"Record Type", "Value", "Query Time (ms)"};
+        String[] ColumnNames = { "Record Type", "Value", "Query Time (ms)" };
         TableModel = new DefaultTableModel(ColumnNames, 0) {
             @Override
             public boolean isCellEditable(int RowArg, int ColumnArg) {
@@ -84,17 +83,16 @@ public class HTONMapperDnsRecordsView extends HTONMapperPanel {
         StatusLabel.setForeground(HTONMapperTheme.ColorTextMuted);
 
         EngineInstance.ResolveAllRecords(
-                HostValue,
-                RecordArg -> SwingUtilities.invokeLater(() -> TableModel.addRow(new Object[]{
-                        RecordArg.GetRecordType(), RecordArg.GetRecordValue(), RecordArg.GetQueryTimeMs()
-                })),
-                () -> SwingUtilities.invokeLater(() -> {
+            HostValue,
+            RecordArg -> SwingUtilities.invokeLater(() -> TableModel.addRow(new Object[] { RecordArg.GetRecordType(), RecordArg.GetRecordValue(), RecordArg.GetQueryTimeMs() })),
+            () ->
+                SwingUtilities.invokeLater(() -> {
                     LookupButton.setEnabled(true);
                     int FoundCount = TableModel.getRowCount();
                     StatusLabel.setText(FoundCount + " record(s) found");
                     StatusLabel.setForeground(FoundCount > 0 ? HTONMapperTheme.ColorSoftGreen : HTONMapperTheme.ColorSoftYellow);
                 }),
-                OnLogMessage
+            OnLogMessage
         );
     }
 }

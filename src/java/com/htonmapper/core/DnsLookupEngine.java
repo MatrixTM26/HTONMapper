@@ -1,20 +1,19 @@
 package com.htonmapper.core;
 
-import javax.naming.directory.Attribute;
-import javax.naming.directory.Attributes;
-import javax.naming.directory.InitialDirContext;
 import java.net.InetAddress;
 import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.List;
 import java.util.function.Consumer;
+import javax.naming.directory.Attribute;
+import javax.naming.directory.Attributes;
+import javax.naming.directory.InitialDirContext;
 
 public class DnsLookupEngine {
 
-    private static final String[] QueryTypes = {"A", "AAAA", "MX", "TXT", "NS", "CNAME", "SOA"};
+    private static final String[] QueryTypes = { "A", "AAAA", "MX", "TXT", "NS", "CNAME", "SOA" };
 
-    public void ResolveAllRecords(String HostName, Consumer<DnsRecordResult> OnRecordFound,
-                                   Runnable OnLookupComplete, Consumer<String> OnLogMessage) {
+    public void ResolveAllRecords(String HostName, Consumer<DnsRecordResult> OnRecordFound, Runnable OnLookupComplete, Consumer<String> OnLogMessage) {
         Thread LookupThread = new Thread(() -> {
             OnLogMessage.accept("[*] Resolving DNS records for " + HostName);
             for (String QueryTypeArg : QueryTypes) {
@@ -38,7 +37,7 @@ public class DnsLookupEngine {
             Hashtable<String, String> EnvironmentArg = new Hashtable<>();
             EnvironmentArg.put("java.naming.factory.initial", "com.sun.jndi.dns.DnsContextFactory");
             InitialDirContext DirContextArg = new InitialDirContext(EnvironmentArg);
-            Attributes AttributesArg = DirContextArg.getAttributes(HostName, new String[]{QueryTypeArg});
+            Attributes AttributesArg = DirContextArg.getAttributes(HostName, new String[] { QueryTypeArg });
             Attribute AttributeArg = AttributesArg.get(QueryTypeArg);
 
             if (AttributeArg == null) {

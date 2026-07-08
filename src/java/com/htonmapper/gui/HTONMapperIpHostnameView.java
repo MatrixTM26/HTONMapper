@@ -1,11 +1,11 @@
 package com.htonmapper.gui;
 
-import javax.swing.SwingUtilities;
-import javax.swing.border.EmptyBorder;
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import java.net.InetAddress;
 import java.util.function.Consumer;
+import javax.swing.SwingUtilities;
+import javax.swing.border.EmptyBorder;
 
 public class HTONMapperIpHostnameView extends HTONMapperPanel {
 

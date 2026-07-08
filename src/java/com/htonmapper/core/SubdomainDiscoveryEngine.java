@@ -18,9 +18,7 @@ public class SubdomainDiscoveryEngine {
         this.IsRunning = false;
     }
 
-    public void StartDiscovery(String BaseDomain, int ThreadCount,
-                                Consumer<SubdomainResult> OnSubdomainFound, BiConsumer<Integer, Integer> OnProgressUpdate,
-                                Runnable OnDiscoveryComplete, Consumer<String> OnLogMessage) {
+    public void StartDiscovery(String BaseDomain, int ThreadCount, Consumer<SubdomainResult> OnSubdomainFound, BiConsumer<Integer, Integer> OnProgressUpdate, Runnable OnDiscoveryComplete, Consumer<String> OnLogMessage) {
         IsRunning = true;
         List<String> WordlistArg = SubdomainWordlist.GetDefaultWordlist();
         WorkerPool = Executors.newFixedThreadPool(ThreadCount);

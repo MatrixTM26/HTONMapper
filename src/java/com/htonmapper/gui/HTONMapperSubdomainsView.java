@@ -1,15 +1,14 @@
 package com.htonmapper.gui;
 
 import com.htonmapper.core.SubdomainDiscoveryEngine;
-
+import java.awt.BorderLayout;
+import java.awt.FlowLayout;
+import java.util.function.Consumer;
 import javax.swing.JScrollPane;
 import javax.swing.SwingUtilities;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 import javax.swing.table.DefaultTableModel;
-import java.awt.BorderLayout;
-import java.awt.FlowLayout;
-import java.util.function.Consumer;
 
 public class HTONMapperSubdomainsView extends HTONMapperPanel {
 
@@ -75,7 +74,7 @@ public class HTONMapperSubdomainsView extends HTONMapperPanel {
         CountLabel.SetSmallStyle();
         CountLabel.setBorder(new EmptyBorder(10, 0, 10, 0));
 
-        String[] ColumnNames = {"Subdomain", "Resolved IP", "Response Time (ms)"};
+        String[] ColumnNames = { "Subdomain", "Resolved IP", "Response Time (ms)" };
         TableModel = new DefaultTableModel(ColumnNames, 0) {
             @Override
             public boolean isCellEditable(int RowArg, int ColumnArg) {
@@ -114,21 +113,21 @@ public class HTONMapperSubdomainsView extends HTONMapperPanel {
         ProgressIndicator.ResetProgress();
 
         EngineInstance.StartDiscovery(
-                DomainValue,
-                60,
-                ResultArg -> SwingUtilities.invokeLater(() -> {
-                    TableModel.addRow(new Object[]{
-                            ResultArg.GetSubdomainName(), ResultArg.GetResolvedIpAddress(), ResultArg.GetResponseTimeMs()
-                    });
+            DomainValue,
+            60,
+            ResultArg ->
+                SwingUtilities.invokeLater(() -> {
+                    TableModel.addRow(new Object[] { ResultArg.GetSubdomainName(), ResultArg.GetResolvedIpAddress(), ResultArg.GetResponseTimeMs() });
                     CountLabel.setText(TableModel.getRowCount() + " subdomains found");
                 }),
-                ProgressIndicator::UpdatePercentValue,
-                () -> SwingUtilities.invokeLater(() -> {
+            ProgressIndicator::UpdatePercentValue,
+            () ->
+                SwingUtilities.invokeLater(() -> {
                     StartButton.setEnabled(true);
                     StopButton.setEnabled(false);
                     ProgressIndicator.MarkComplete();
                 }),
-                OnLogMessage
+            OnLogMessage
         );
     }
 

@@ -1,6 +1,5 @@
 package com.htonmapper.gui;
 
-import javax.swing.JPanel;
 import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Font;
@@ -9,10 +8,12 @@ import java.awt.Graphics2D;
 import java.awt.RenderingHints;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JPanel;
 
 public class HTONMapperGaugeChart extends JPanel {
 
     public static class SegmentData {
+
         public final String LabelText;
         public final int ValueAmount;
         public final Color SegmentColor;
@@ -70,8 +71,7 @@ public class HTONMapperGaugeChart extends JPanel {
             for (SegmentData SegmentArg : SegmentList) {
                 double SweepAngle = (SegmentArg.ValueAmount / (double) TotalAmount) * 360.0;
                 Graphics2DArg.setColor(SegmentArg.SegmentColor);
-                Graphics2DArg.drawArc(OffsetX, OffsetY, DiameterSize, DiameterSize,
-                        (int) Math.round(StartAngle), -(int) Math.round(SweepAngle));
+                Graphics2DArg.drawArc(OffsetX, OffsetY, DiameterSize, DiameterSize, (int) Math.round(StartAngle), -((int) Math.round(SweepAngle)));
                 StartAngle -= SweepAngle;
             }
         }
@@ -93,6 +93,6 @@ public class HTONMapperGaugeChart extends JPanel {
         }
         java.awt.FontMetrics MetricsArg = Graphics2DArg.getFontMetrics();
         int TextWidth = MetricsArg.stringWidth(TextArg);
-        Graphics2DArg.drawString(TextArg, CenterX - (TextWidth / 2), CenterY);
+        Graphics2DArg.drawString(TextArg, CenterX - TextWidth / 2, CenterY);
     }
 }

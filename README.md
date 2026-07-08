@@ -18,40 +18,6 @@ This tool performs TCP connect scanning through the standard Java `Socket` API. 
 - GitHub dark themed GUI with a collapsible sidebar and burger toggle
 - Custom Swing component subclasses under `com.htonmapper.gui`
 
-## Project Structure
-
-```
-HTONMapper/
-├── build.sh
-├── run.sh
-├── README.md
-└── src/
-    └── java/
-        └── com/
-            └── htonmapper/
-                ├── Main.java
-                ├── core/
-                │   ├── ScannerEngine.java
-                │   ├── ServiceLookup.java
-                │   └── PortResult.java
-                └── gui/
-                    ├── HTONMapperTheme.java
-                    ├── HTONMapperFrame.java
-                    ├── HTONMapperPanel.java
-                    ├── HTONMapperLabel.java
-                    ├── HTONMapperButton.java
-                    ├── HTONMapperTextField.java
-                    ├── HTONMapperTable.java
-                    ├── HTONMapperProgressBar.java
-                    ├── HTONMapperTitleBar.java
-                    ├── HTONMapperSidebar.java
-                    ├── HTONMapperScannerView.java
-                    ├── HTONMapperResultsView.java
-                    ├── HTONMapperLogView.java
-                    ├── HTONMapperAboutView.java
-                    └── HTONMapperGUI.java
-```
-
 ## Requirements
 
 - JDK 8 or newer (a full JDK, not just a JRE, since `javac` is required to build)
@@ -119,9 +85,3 @@ java com.htonmapper.Main
 ## Responsible Use
 
 Only scan hosts and networks you own or are explicitly authorized to test. Unauthorized port scanning may violate laws or terms of service depending on your jurisdiction and the target network's policies.
-
-## Author
-
-Teuku Maulana
-Offensive Security / Red Teaming, DISKOMINFO Aceh Selatan
-Certified Ethical Hacker (CEH)

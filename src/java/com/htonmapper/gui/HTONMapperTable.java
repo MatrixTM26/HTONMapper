@@ -1,9 +1,9 @@
 package com.htonmapper.gui;
 
+import java.awt.Component;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
-import java.awt.Component;
 
 public class HTONMapperTable extends JTable {
 
@@ -44,8 +44,7 @@ public class HTONMapperTable extends JTable {
     private void ApplyRowRenderer(int StatusColumnIndex) {
         DefaultTableCellRenderer RowRenderer = new DefaultTableCellRenderer() {
             @Override
-            public Component getTableCellRendererComponent(JTable TableArg, Object ValueArg, boolean IsSelected,
-                                                             boolean HasFocus, int RowIndex, int ColumnIndex) {
+            public Component getTableCellRendererComponent(JTable TableArg, Object ValueArg, boolean IsSelected, boolean HasFocus, int RowIndex, int ColumnIndex) {
                 Component CellComponent = super.getTableCellRendererComponent(TableArg, ValueArg, IsSelected, HasFocus, RowIndex, ColumnIndex);
                 if (!IsSelected) {
                     CellComponent.setBackground(RowIndex % 2 == 0 ? HTONMapperTheme.ColorBackgroundInset : HTONMapperTheme.ColorRowAlt);

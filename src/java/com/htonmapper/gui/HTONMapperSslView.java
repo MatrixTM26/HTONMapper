@@ -1,12 +1,11 @@
 package com.htonmapper.gui;
 
 import com.htonmapper.core.SslScannerEngine;
-
-import javax.swing.SwingUtilities;
-import javax.swing.border.EmptyBorder;
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import java.util.function.Consumer;
+import javax.swing.SwingUtilities;
+import javax.swing.border.EmptyBorder;
 
 public class HTONMapperSslView extends HTONMapperPanel {
 
@@ -132,17 +131,17 @@ public class HTONMapperSslView extends HTONMapperPanel {
         StatusLabel.setForeground(HTONMapperTheme.ColorTextMuted);
 
         EngineInstance.ScanCertificate(
-                HostValue,
-                PortValue,
-                5000,
-                ResultArg -> SwingUtilities.invokeLater(() -> {
+            HostValue,
+            PortValue,
+            5000,
+            ResultArg ->
+                SwingUtilities.invokeLater(() -> {
                     SubjectValue.setText(ResultArg.GetSubjectName());
                     IssuerValue.setText(ResultArg.GetIssuerName());
                     ValidFromValue.setText(ResultArg.GetValidFromDate());
                     ValidUntilValue.setText(ResultArg.GetValidUntilDate());
                     DaysRemainingValue.setText(String.valueOf(ResultArg.GetDaysUntilExpiry()));
-                    DaysRemainingValue.setForeground(ResultArg.GetIsExpired() ? HTONMapperTheme.ColorSoftRed :
-                            (ResultArg.GetDaysUntilExpiry() < 30 ? HTONMapperTheme.ColorSoftYellow : HTONMapperTheme.ColorSoftGreen));
+                    DaysRemainingValue.setForeground(ResultArg.GetIsExpired() ? HTONMapperTheme.ColorSoftRed : ResultArg.GetDaysUntilExpiry() < 30 ? HTONMapperTheme.ColorSoftYellow : HTONMapperTheme.ColorSoftGreen);
                     ProtocolValue.setText(ResultArg.GetProtocolVersion());
                     CipherValue.setText(ResultArg.GetCipherSuiteName());
                     SignatureAlgValue.setText(ResultArg.GetSignatureAlgorithm());
@@ -152,12 +151,13 @@ public class HTONMapperSslView extends HTONMapperPanel {
                     StatusLabel.setForeground(ResultArg.GetIsExpired() ? HTONMapperTheme.ColorSoftRed : HTONMapperTheme.ColorSoftGreen);
                     ScanButton.setEnabled(true);
                 }),
-                FailureMessage -> SwingUtilities.invokeLater(() -> {
+            FailureMessage ->
+                SwingUtilities.invokeLater(() -> {
                     StatusLabel.setText("Scan failed: " + FailureMessage);
                     StatusLabel.setForeground(HTONMapperTheme.ColorSoftRed);
                     ScanButton.setEnabled(true);
                 }),
-                OnLogMessage
+            OnLogMessage
         );
     }
 }

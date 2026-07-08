@@ -8,8 +8,7 @@ public class NetworkOriginResult {
     private final String CountryCode;
     private final String DetectionSummary;
 
-    public NetworkOriginResult(boolean IsTorExitNodeArg, boolean IsKnownHostingRangeArg, String OrganizationNameArg,
-                                String CountryCodeArg, String DetectionSummaryArg) {
+    public NetworkOriginResult(boolean IsTorExitNodeArg, boolean IsKnownHostingRangeArg, String OrganizationNameArg, String CountryCodeArg, String DetectionSummaryArg) {
         this.IsTorExitNode = IsTorExitNodeArg;
         this.IsKnownHostingRange = IsKnownHostingRangeArg;
         this.OrganizationName = OrganizationNameArg;

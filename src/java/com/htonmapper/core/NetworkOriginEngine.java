@@ -16,8 +16,7 @@ public class NetworkOriginEngine {
     private static final Pattern OrgNamePattern = Pattern.compile("\"name\"\\s*:\\s*\"([^\"]+)\"");
     private static final Pattern CountryPattern = Pattern.compile("\"country\"\\s*:\\s*\"([^\"]+)\"");
 
-    public void AnalyzeOrigin(String TargetHost, int TimeoutMs, Consumer<NetworkOriginResult> OnResultReady,
-                              Consumer<String> OnScanFailed, Consumer<String> OnLogMessage) {
+    public void AnalyzeOrigin(String TargetHost, int TimeoutMs, Consumer<NetworkOriginResult> OnResultReady, Consumer<String> OnScanFailed, Consumer<String> OnLogMessage) {
         Thread ScanThread = new Thread(() -> {
             OnLogMessage.accept("[*] Resolving IP address for " + TargetHost);
             try {
@@ -99,13 +98,12 @@ public class NetworkOriginEngine {
         } catch (Exception ExceptionArg) {
             /* rdap lookup failed, return defaults */
         }
-        return new String[]{OrganizationName, CountryCode};
+        return new String[] { OrganizationName, CountryCode };
     }
 
     private boolean DetectHostingKeyword(String OrganizationName) {
         String LowerName = OrganizationName.toLowerCase();
-        String[] HostingKeywords = {"amazon", "aws", "google", "azure", "digitalocean", "linode", "vultr",
-                "ovh", "hetzner", "cloud", "hosting", "datacenter", "data center", "vpn", "proxy"};
+        String[] HostingKeywords = { "amazon", "aws", "google", "azure", "digitalocean", "linode", "vultr", "ovh", "hetzner", "cloud", "hosting", "datacenter", "data center", "vpn", "proxy" };
         for (String KeywordArg : HostingKeywords) {
             if (LowerName.contains(KeywordArg)) {
                 return true;

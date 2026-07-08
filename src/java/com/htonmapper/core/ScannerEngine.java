@@ -21,12 +21,10 @@ public class ScannerEngine {
         this.IsRunning = false;
     }
 
-    public void StartScan(String TargetHost, int StartPort, int EndPort, int TimeoutMs, int ThreadCount, boolean IncludeClosedPorts,
-                          Consumer<PortResult> OnPortResult, BiConsumer<Integer, Integer> OnProgressUpdate,
-                          Runnable OnScanComplete, Consumer<String> OnLogMessage) {
+    public void StartScan(String TargetHost, int StartPort, int EndPort, int TimeoutMs, int ThreadCount, boolean IncludeClosedPorts, Consumer<PortResult> OnPortResult, BiConsumer<Integer, Integer> OnProgressUpdate, Runnable OnScanComplete, Consumer<String> OnLogMessage) {
         IsRunning = true;
         WorkerPool = Executors.newFixedThreadPool(ThreadCount);
-        int TotalPortCount = (EndPort - StartPort) + 1;
+        int TotalPortCount = EndPort - StartPort + 1;
         AtomicInteger CompletedCount = new AtomicInteger(0);
 
         Thread DispatchThread = new Thread(() -> {

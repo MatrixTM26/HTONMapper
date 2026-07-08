@@ -13,9 +13,7 @@ public class SslCertificateResult {
     private final boolean IsExpired;
     private final boolean IsSelfSigned;
 
-    public SslCertificateResult(String SubjectNameArg, String IssuerNameArg, String ValidFromDateArg, String ValidUntilDateArg,
-                                 String SignatureAlgorithmArg, String ProtocolVersionArg, String CipherSuiteNameArg,
-                                 int DaysUntilExpiryArg, boolean IsExpiredArg, boolean IsSelfSignedArg) {
+    public SslCertificateResult(String SubjectNameArg, String IssuerNameArg, String ValidFromDateArg, String ValidUntilDateArg, String SignatureAlgorithmArg, String ProtocolVersionArg, String CipherSuiteNameArg, int DaysUntilExpiryArg, boolean IsExpiredArg, boolean IsSelfSignedArg) {
         this.SubjectName = SubjectNameArg;
         this.IssuerName = IssuerNameArg;
         this.ValidFromDate = ValidFromDateArg;

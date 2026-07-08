@@ -1,22 +1,20 @@
 package com.htonmapper.core;
 
-import javax.net.ssl.SSLSession;
-import javax.net.ssl.SSLSocket;
-import javax.net.ssl.SSLSocketFactory;
 import java.security.cert.Certificate;
 import java.security.cert.X509Certificate;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
 import java.util.function.Consumer;
+import javax.net.ssl.SSLSession;
+import javax.net.ssl.SSLSocket;
+import javax.net.ssl.SSLSocketFactory;
 
 public class SslScannerEngine {
 
     private final SimpleDateFormat DateFormatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
-    public void ScanCertificate(String TargetHost, int TargetPort, int TimeoutMs,
-                                 Consumer<SslCertificateResult> OnCertificateFound,
-                                 Consumer<String> OnScanFailed, Consumer<String> OnLogMessage) {
+    public void ScanCertificate(String TargetHost, int TargetPort, int TimeoutMs, Consumer<SslCertificateResult> OnCertificateFound, Consumer<String> OnScanFailed, Consumer<String> OnLogMessage) {
         Thread ScanThread = new Thread(() -> {
             OnLogMessage.accept("[*] Connecting to " + TargetHost + ":" + TargetPort + " for TLS handshake");
             try {
@@ -49,8 +47,7 @@ public class SslScannerEngine {
         ScanThread.start();
     }
 
-    private void ProcessCertificate(X509Certificate LeafCertificate, Certificate[] CertificateChain,
-                                     String ProtocolVersion, String CipherSuiteName, Consumer<SslCertificateResult> OnCertificateFound) {
+    private void ProcessCertificate(X509Certificate LeafCertificate, Certificate[] CertificateChain, String ProtocolVersion, String CipherSuiteName, Consumer<SslCertificateResult> OnCertificateFound) {
         String SubjectName = LeafCertificate.getSubjectX500Principal().getName();
         String IssuerName = LeafCertificate.getIssuerX500Principal().getName();
         Date ValidFrom = LeafCertificate.getNotBefore();
@@ -63,17 +60,6 @@ public class SslScannerEngine {
         boolean IsExpired = ExpiryTimeMs < CurrentTimeMs;
         boolean IsSelfSigned = CertificateChain.length == 1 && SubjectName.equals(IssuerName);
 
-        OnCertificateFound.accept(new SslCertificateResult(
-                SubjectName,
-                IssuerName,
-                DateFormatter.format(ValidFrom),
-                DateFormatter.format(ValidUntil),
-                SignatureAlgorithm,
-                ProtocolVersion,
-                CipherSuiteName,
-                (int) DaysRemaining,
-                IsExpired,
-                IsSelfSigned
-        ));
+        OnCertificateFound.accept(new SslCertificateResult(SubjectName, IssuerName, DateFormatter.format(ValidFrom), DateFormatter.format(ValidUntil), SignatureAlgorithm, ProtocolVersion, CipherSuiteName, (int) DaysRemaining, IsExpired, IsSelfSigned));
     }
 }

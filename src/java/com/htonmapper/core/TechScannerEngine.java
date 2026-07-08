@@ -12,21 +12,13 @@ import java.util.regex.Pattern;
 
 public class TechScannerEngine {
 
-    private static final String[] RequiredSecurityHeaders = {
-            "Strict-Transport-Security",
-            "Content-Security-Policy",
-            "X-Frame-Options",
-            "X-Content-Type-Options",
-            "Referrer-Policy",
-            "Permissions-Policy"
-    };
+    private static final String[] RequiredSecurityHeaders = { "Strict-Transport-Security", "Content-Security-Policy", "X-Frame-Options", "X-Content-Type-Options", "Referrer-Policy", "Permissions-Policy" };
 
     private static final Pattern OutdatedApachePattern = Pattern.compile("Apache/(\\d+)\\.(\\d+)\\.(\\d+)");
     private static final Pattern OutdatedNginxPattern = Pattern.compile("nginx/(\\d+)\\.(\\d+)\\.(\\d+)");
     private static final Pattern OutdatedPhpPattern = Pattern.compile("PHP/(\\d+)\\.(\\d+)");
 
-    public void ScanHeaders(String TargetUrl, int TimeoutMs, Consumer<HttpHeaderResult> OnHeaderResult,
-                             Consumer<String> OnScanFailed, Consumer<String> OnLogMessage) {
+    public void ScanHeaders(String TargetUrl, int TimeoutMs, Consumer<HttpHeaderResult> OnHeaderResult, Consumer<String> OnScanFailed, Consumer<String> OnLogMessage) {
         Thread ScanThread = new Thread(() -> {
             OnLogMessage.accept("[*] Sending HTTP request to " + TargetUrl);
             HttpURLConnection ConnectionArg = null;
@@ -48,8 +40,7 @@ public class TechScannerEngine {
                 List<String> TechnologyList = DetectTechnologies(HeaderMapArg);
                 boolean HasOutdatedSignature = DetectOutdatedSignature(ServerBanner);
 
-                OnHeaderResult.accept(new HttpHeaderResult(StatusCode, ServerBanner, PoweredByBanner,
-                        HeaderMapArg, MissingHeadersList, TechnologyList, HasOutdatedSignature));
+                OnHeaderResult.accept(new HttpHeaderResult(StatusCode, ServerBanner, PoweredByBanner, HeaderMapArg, MissingHeadersList, TechnologyList, HasOutdatedSignature));
                 OnLogMessage.accept("[*] HTTP scan completed with status " + StatusCode);
             } catch (Exception ExceptionArg) {
                 OnScanFailed.accept(ExceptionArg.getMessage() == null ? ExceptionArg.getClass().getSimpleName() : ExceptionArg.getMessage());

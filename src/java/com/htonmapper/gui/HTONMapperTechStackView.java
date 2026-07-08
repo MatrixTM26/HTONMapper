@@ -1,12 +1,11 @@
 package com.htonmapper.gui;
 
 import com.htonmapper.core.TechScannerEngine;
-
-import javax.swing.SwingUtilities;
-import javax.swing.border.EmptyBorder;
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import java.util.function.Consumer;
+import javax.swing.SwingUtilities;
+import javax.swing.border.EmptyBorder;
 
 public class HTONMapperTechStackView extends HTONMapperPanel {
 
@@ -109,9 +108,10 @@ public class HTONMapperTechStackView extends HTONMapperPanel {
         StatusLabel.setForeground(HTONMapperTheme.ColorTextMuted);
 
         EngineInstance.ScanHeaders(
-                UrlValue,
-                5000,
-                ResultArg -> SwingUtilities.invokeLater(() -> {
+            UrlValue,
+            5000,
+            ResultArg ->
+                SwingUtilities.invokeLater(() -> {
                     StatusCodeValue.setText(String.valueOf(ResultArg.GetStatusCode()));
                     ServerValue.setText(ResultArg.GetServerBanner());
                     PoweredByValue.setText(ResultArg.GetPoweredByBanner());
@@ -125,12 +125,13 @@ public class HTONMapperTechStackView extends HTONMapperPanel {
                     StatusLabel.setForeground(HTONMapperTheme.ColorSoftGreen);
                     ScanButton.setEnabled(true);
                 }),
-                FailureMessage -> SwingUtilities.invokeLater(() -> {
+            FailureMessage ->
+                SwingUtilities.invokeLater(() -> {
                     StatusLabel.setText("Scan failed: " + FailureMessage);
                     StatusLabel.setForeground(HTONMapperTheme.ColorSoftRed);
                     ScanButton.setEnabled(true);
                 }),
-                OnLogMessage
+            OnLogMessage
         );
     }
 }

@@ -14,9 +14,7 @@ public class HttpHeaderResult {
     private final List<String> DetectedTechnologies;
     private final boolean HasOutdatedSignature;
 
-    public HttpHeaderResult(int StatusCodeArg, String ServerBannerArg, String PoweredByBannerArg,
-                             Map<String, String> AllHeadersArg, List<String> MissingSecurityHeadersArg,
-                             List<String> DetectedTechnologiesArg, boolean HasOutdatedSignatureArg) {
+    public HttpHeaderResult(int StatusCodeArg, String ServerBannerArg, String PoweredByBannerArg, Map<String, String> AllHeadersArg, List<String> MissingSecurityHeadersArg, List<String> DetectedTechnologiesArg, boolean HasOutdatedSignatureArg) {
         this.StatusCode = StatusCodeArg;
         this.ServerBanner = ServerBannerArg;
         this.PoweredByBanner = PoweredByBannerArg;

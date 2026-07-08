@@ -1,10 +1,5 @@
 package com.htonmapper.gui;
 
-import javax.swing.BoxLayout;
-import javax.swing.JScrollPane;
-import javax.swing.border.EmptyBorder;
-import javax.swing.border.MatteBorder;
-import javax.swing.border.CompoundBorder;
 import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.Dimension;
@@ -13,6 +8,11 @@ import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Consumer;
+import javax.swing.BoxLayout;
+import javax.swing.JScrollPane;
+import javax.swing.border.CompoundBorder;
+import javax.swing.border.EmptyBorder;
+import javax.swing.border.MatteBorder;
 
 public class HTONMapperSidebar extends HTONMapperPanel {
 
@@ -150,27 +150,26 @@ public class HTONMapperSidebar extends HTONMapperPanel {
         ButtonArg.setAlignmentX(Component.LEFT_ALIGNMENT);
         ButtonArg.setMaximumSize(new Dimension(1000, 36));
         ButtonArg.setPreferredSize(new Dimension(ExpandedWidth, 36));
-        ButtonArg.setBorder(new CompoundBorder(
-                new MatteBorder(0, 3, 0, 0, HTONMapperTheme.ColorBackgroundHeader),
-                new EmptyBorder(0, 8, 0, 0)
-        ));
+        ButtonArg.setBorder(new CompoundBorder(new MatteBorder(0, 3, 0, 0, HTONMapperTheme.ColorBackgroundHeader), new EmptyBorder(0, 8, 0, 0)));
         ButtonArg.setMargin(new java.awt.Insets(0, 10, 0, 0));
 
-        ButtonArg.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseEntered(MouseEvent EventArg) {
-                if (ButtonArg != ActiveButton) {
-                    ButtonArg.setBackground(HTONMapperTheme.ColorBackgroundHover);
+        ButtonArg.addMouseListener(
+            new MouseAdapter() {
+                @Override
+                public void mouseEntered(MouseEvent EventArg) {
+                    if (ButtonArg != ActiveButton) {
+                        ButtonArg.setBackground(HTONMapperTheme.ColorBackgroundHover);
+                    }
                 }
-            }
 
-            @Override
-            public void mouseExited(MouseEvent EventArg) {
-                if (ButtonArg != ActiveButton) {
-                    ButtonArg.setBackground(HTONMapperTheme.ColorBackgroundHeader);
+                @Override
+                public void mouseExited(MouseEvent EventArg) {
+                    if (ButtonArg != ActiveButton) {
+                        ButtonArg.setBackground(HTONMapperTheme.ColorBackgroundHeader);
+                    }
                 }
             }
-        });
+        );
 
         ButtonArg.addActionListener(EventArg -> {
             SetActiveButton(ButtonArg);
@@ -185,17 +184,11 @@ public class HTONMapperSidebar extends HTONMapperPanel {
         for (HTONMapperButton ButtonArg : NavButtonList) {
             ButtonArg.setBackground(HTONMapperTheme.ColorBackgroundHeader);
             ButtonArg.setForeground(HTONMapperTheme.ColorTextSecondary);
-            ButtonArg.setBorder(new CompoundBorder(
-                    new MatteBorder(0, 3, 0, 0, HTONMapperTheme.ColorBackgroundHeader),
-                    new EmptyBorder(0, 8, 0, 0)
-            ));
+            ButtonArg.setBorder(new CompoundBorder(new MatteBorder(0, 3, 0, 0, HTONMapperTheme.ColorBackgroundHeader), new EmptyBorder(0, 8, 0, 0)));
         }
         TargetButton.setBackground(HTONMapperTheme.ColorBackgroundHover);
         TargetButton.setForeground(HTONMapperTheme.ColorTextPrimary);
-        TargetButton.setBorder(new CompoundBorder(
-                new MatteBorder(0, 3, 0, 0, HTONMapperTheme.ColorSoftBlue),
-                new EmptyBorder(0, 8, 0, 0)
-        ));
+        TargetButton.setBorder(new CompoundBorder(new MatteBorder(0, 3, 0, 0, HTONMapperTheme.ColorSoftBlue), new EmptyBorder(0, 8, 0, 0)));
         ActiveButton = TargetButton;
     }
 

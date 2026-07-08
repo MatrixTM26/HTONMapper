@@ -1,12 +1,11 @@
 package com.htonmapper.gui;
 
 import com.htonmapper.core.NetworkOriginEngine;
-
-import javax.swing.SwingUtilities;
-import javax.swing.border.EmptyBorder;
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import java.util.function.Consumer;
+import javax.swing.SwingUtilities;
+import javax.swing.border.EmptyBorder;
 
 public class HTONMapperOriginView extends HTONMapperPanel {
 
@@ -107,9 +106,10 @@ public class HTONMapperOriginView extends HTONMapperPanel {
         StatusLabel.setForeground(HTONMapperTheme.ColorTextMuted);
 
         EngineInstance.AnalyzeOrigin(
-                HostValue,
-                6000,
-                ResultArg -> SwingUtilities.invokeLater(() -> {
+            HostValue,
+            6000,
+            ResultArg ->
+                SwingUtilities.invokeLater(() -> {
                     TorValue.setText(ResultArg.GetIsTorExitNode() ? "Yes" : "No");
                     TorValue.setForeground(ResultArg.GetIsTorExitNode() ? HTONMapperTheme.ColorSoftPurple : HTONMapperTheme.ColorSoftGreen);
                     HostingValue.setText(ResultArg.GetIsKnownHostingRange() ? "Yes" : "No");
@@ -121,12 +121,13 @@ public class HTONMapperOriginView extends HTONMapperPanel {
                     StatusLabel.setForeground(HTONMapperTheme.ColorSoftGreen);
                     ScanButton.setEnabled(true);
                 }),
-                FailureMessage -> SwingUtilities.invokeLater(() -> {
+            FailureMessage ->
+                SwingUtilities.invokeLater(() -> {
                     StatusLabel.setText("Analysis failed: " + FailureMessage);
                     StatusLabel.setForeground(HTONMapperTheme.ColorSoftRed);
                     ScanButton.setEnabled(true);
                 }),
-                OnLogMessage
+            OnLogMessage
         );
     }
 }

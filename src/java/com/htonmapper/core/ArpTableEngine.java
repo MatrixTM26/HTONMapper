@@ -10,10 +10,8 @@ import java.util.regex.Pattern;
 
 public class ArpTableEngine {
 
-    private static final Pattern WindowsArpPattern = Pattern.compile(
-            "^\\s*(\\d{1,3}(?:\\.\\d{1,3}){3})\\s+([0-9a-fA-F-]{17})\\s+(\\w+)");
-    private static final Pattern LinuxArpPattern = Pattern.compile(
-            "^\\s*(\\d{1,3}(?:\\.\\d{1,3}){3})\\s+\\S+\\s+\\S+\\s+([0-9a-fA-F:]{17})\\s+\\S+\\s+(\\S+)");
+    private static final Pattern WindowsArpPattern = Pattern.compile("^\\s*(\\d{1,3}(?:\\.\\d{1,3}){3})\\s+([0-9a-fA-F-]{17})\\s+(\\w+)");
+    private static final Pattern LinuxArpPattern = Pattern.compile("^\\s*(\\d{1,3}(?:\\.\\d{1,3}){3})\\s+\\S+\\s+\\S+\\s+([0-9a-fA-F:]{17})\\s+\\S+\\s+(\\S+)");
 
     public void ReadLocalArpTable(Consumer<ArpEntryResult> OnEntryFound, Runnable OnReadComplete, Consumer<String> OnLogMessage) {
         Thread ReadThread = new Thread(() -> {
@@ -36,7 +34,7 @@ public class ArpTableEngine {
 
     private List<ArpEntryResult> ReadWindowsArpTable() throws Exception {
         List<ArpEntryResult> ResultList = new ArrayList<>();
-        Process ProcessArg = Runtime.getRuntime().exec(new String[]{"arp", "-a"});
+        Process ProcessArg = Runtime.getRuntime().exec(new String[] { "arp", "-a" });
         try (BufferedReader ReaderArg = new BufferedReader(new InputStreamReader(ProcessArg.getInputStream()))) {
             String LineArg;
             String CurrentInterface = "unknown";
@@ -59,9 +57,9 @@ public class ArpTableEngine {
         List<ArpEntryResult> ResultList = new ArrayList<>();
         Process ProcessArg;
         try {
-            ProcessArg = Runtime.getRuntime().exec(new String[]{"ip", "neigh"});
+            ProcessArg = Runtime.getRuntime().exec(new String[] { "ip", "neigh" });
         } catch (Exception ExceptionArg) {
-            ProcessArg = Runtime.getRuntime().exec(new String[]{"arp", "-n"});
+            ProcessArg = Runtime.getRuntime().exec(new String[] { "arp", "-n" });
         }
         try (BufferedReader ReaderArg = new BufferedReader(new InputStreamReader(ProcessArg.getInputStream()))) {
             String LineArg;
