@@ -2,6 +2,10 @@ package com.htonmapper.core;
 
 public class PortResult {
 
+    public static final String StatusOpen = "OPEN";
+    public static final String StatusClosed = "CLOSED";
+    public static final String StatusFiltered = "FILTERED";
+
     private final int PortNumber;
     private final String PortStatus;
     private final String ServiceName;

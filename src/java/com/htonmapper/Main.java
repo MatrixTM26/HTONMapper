@@ -1,6 +1,7 @@
 package com.htonmapper;
 
 import com.htonmapper.gui.HTONMapperGUI;
+
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 

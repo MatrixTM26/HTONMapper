@@ -1,10 +1,11 @@
 package com.htonmapper.gui;
 
+import javax.swing.JButton;
+import javax.swing.border.LineBorder;
+import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import javax.swing.JButton;
-import javax.swing.border.LineBorder;
 
 public class HTONMapperButton extends JButton {
 
@@ -75,23 +76,21 @@ public class HTONMapperButton extends JButton {
     }
 
     private void AttachHoverBehavior() {
-        addMouseListener(
-            new MouseAdapter() {
-                @Override
-                public void mouseEntered(MouseEvent EventArg) {
-                    if (isEnabled()) {
-                        ApplyHoverColors();
-                    }
-                }
-
-                @Override
-                public void mouseExited(MouseEvent EventArg) {
-                    if (isEnabled()) {
-                        ApplyRestingColors();
-                    }
+        addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseEntered(MouseEvent EventArg) {
+                if (isEnabled()) {
+                    ApplyHoverColors();
                 }
             }
-        );
+
+            @Override
+            public void mouseExited(MouseEvent EventArg) {
+                if (isEnabled()) {
+                    ApplyRestingColors();
+                }
+            }
+        });
     }
 
     @Override

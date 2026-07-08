@@ -18,12 +18,16 @@ public class HTONMapperTheme {
     public static final Color ColorSoftGreen = new Color(63, 185, 80);
     public static final Color ColorSoftGreenDim = new Color(46, 125, 65);
     public static final Color ColorSoftRed = new Color(248, 81, 73);
+    public static final Color ColorSoftRedDim = new Color(140, 55, 50);
     public static final Color ColorSoftYellow = new Color(210, 153, 34);
+    public static final Color ColorSoftOrange = new Color(219, 109, 40);
+    public static final Color ColorSoftPurple = new Color(163, 113, 247);
     public static final Color ColorTextPrimary = new Color(230, 237, 243);
     public static final Color ColorTextSecondary = new Color(139, 148, 158);
     public static final Color ColorTextMuted = new Color(101, 108, 118);
     public static final Color ColorRowAlt = new Color(19, 23, 30);
     public static final Color ColorSelection = new Color(33, 62, 94);
+    public static final Color ColorSeparator = new Color(56, 62, 70);
 
     public static final Font FontMono = new Font("Courier New", Font.PLAIN, 13);
     public static final Font FontMonoBold = new Font("Courier New", Font.BOLD, 13);

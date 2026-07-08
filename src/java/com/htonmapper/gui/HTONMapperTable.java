@@ -1,9 +1,9 @@
 package com.htonmapper.gui;
 
-import java.awt.Component;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
+import java.awt.Component;
 
 public class HTONMapperTable extends JTable {
 
@@ -11,6 +11,12 @@ public class HTONMapperTable extends JTable {
         super(TableModelArg);
         ApplyBaseStyle();
         ApplyRowRenderer();
+    }
+
+    public HTONMapperTable(DefaultTableModel TableModelArg, int StatusColumnIndex) {
+        super(TableModelArg);
+        ApplyBaseStyle();
+        ApplyRowRenderer(StatusColumnIndex);
     }
 
     private void ApplyBaseStyle() {
@@ -32,16 +38,21 @@ public class HTONMapperTable extends JTable {
     }
 
     private void ApplyRowRenderer() {
+        ApplyRowRenderer(1);
+    }
+
+    private void ApplyRowRenderer(int StatusColumnIndex) {
         DefaultTableCellRenderer RowRenderer = new DefaultTableCellRenderer() {
             @Override
-            public Component getTableCellRendererComponent(JTable TableArg, Object ValueArg, boolean IsSelected, boolean HasFocus, int RowIndex, int ColumnIndex) {
+            public Component getTableCellRendererComponent(JTable TableArg, Object ValueArg, boolean IsSelected,
+                                                             boolean HasFocus, int RowIndex, int ColumnIndex) {
                 Component CellComponent = super.getTableCellRendererComponent(TableArg, ValueArg, IsSelected, HasFocus, RowIndex, ColumnIndex);
                 if (!IsSelected) {
                     CellComponent.setBackground(RowIndex % 2 == 0 ? HTONMapperTheme.ColorBackgroundInset : HTONMapperTheme.ColorRowAlt);
                     CellComponent.setForeground(HTONMapperTheme.ColorTextPrimary);
                 }
-                if (ColumnIndex == 1 && "OPEN".equals(ValueArg)) {
-                    CellComponent.setForeground(HTONMapperTheme.ColorSoftGreen);
+                if (ColumnIndex == StatusColumnIndex) {
+                    ApplyStatusColor(CellComponent, String.valueOf(ValueArg));
                 }
                 setBorder(new javax.swing.border.EmptyBorder(0, 10, 0, 10));
                 return CellComponent;
@@ -49,6 +60,16 @@ public class HTONMapperTable extends JTable {
         };
         for (int ColumnIndex = 0; ColumnIndex < getColumnCount(); ColumnIndex++) {
             getColumnModel().getColumn(ColumnIndex).setCellRenderer(RowRenderer);
+        }
+    }
+
+    private void ApplyStatusColor(Component CellComponent, String ValueArg) {
+        if ("OPEN".equals(ValueArg)) {
+            CellComponent.setForeground(HTONMapperTheme.ColorSoftGreen);
+        } else if ("FILTERED".equals(ValueArg)) {
+            CellComponent.setForeground(HTONMapperTheme.ColorSoftYellow);
+        } else if ("CLOSED".equals(ValueArg)) {
+            CellComponent.setForeground(HTONMapperTheme.ColorTextMuted);
         }
     }
 }

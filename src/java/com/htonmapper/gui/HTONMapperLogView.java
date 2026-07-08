@@ -1,13 +1,13 @@
 package com.htonmapper.gui;
 
-import java.awt.BorderLayout;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.SwingUtilities;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
+import java.awt.BorderLayout;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class HTONMapperLogView extends HTONMapperPanel {
 
@@ -32,7 +32,7 @@ public class HTONMapperLogView extends HTONMapperPanel {
         LogTextArea.setBorder(new EmptyBorder(10, 10, 10, 10));
 
         JScrollPane ScrollContainer = new JScrollPane(LogTextArea);
-        ScrollContainer.setBorder(new LineBorder(HTONMapperTheme.ColorBorderDefault, 1));
+        ScrollContainer.setBorder(new LineBorder(HTONMapperTheme.ColorBorderDefault, 2));
 
         add(TitleLabel, BorderLayout.NORTH);
         add(ScrollContainer, BorderLayout.CENTER);

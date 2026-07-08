@@ -1,7 +1,10 @@
 package com.htonmapper.core;
 
+import java.net.ConnectException;
 import java.net.InetSocketAddress;
+import java.net.NoRouteToHostException;
 import java.net.Socket;
+import java.net.SocketTimeoutException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
@@ -18,7 +21,7 @@ public class ScannerEngine {
         this.IsRunning = false;
     }
 
-    public void StartScan(String TargetHost, int StartPort, int EndPort, int TimeoutMs, int ThreadCount,
+    public void StartScan(String TargetHost, int StartPort, int EndPort, int TimeoutMs, int ThreadCount, boolean IncludeClosedPorts,
                           Consumer<PortResult> OnPortResult, BiConsumer<Integer, Integer> OnProgressUpdate,
                           Runnable OnScanComplete, Consumer<String> OnLogMessage) {
         IsRunning = true;
@@ -37,7 +40,7 @@ public class ScannerEngine {
                 }
                 final int PortToScan = CurrentPort;
                 WorkerPool.submit(() -> {
-                    ScanSinglePort(TargetHost, PortToScan, TimeoutMs, OnPortResult);
+                    ScanSinglePort(TargetHost, PortToScan, TimeoutMs, IncludeClosedPorts, OnPortResult);
                     int CurrentCompleted = CompletedCount.incrementAndGet();
                     OnProgressUpdate.accept(CurrentCompleted, TotalPortCount);
                 });
@@ -59,15 +62,29 @@ public class ScannerEngine {
         DispatchThread.start();
     }
 
-    private void ScanSinglePort(String TargetHost, int PortNumber, int TimeoutMs, Consumer<PortResult> OnPortResult) {
+    private void ScanSinglePort(String TargetHost, int PortNumber, int TimeoutMs, boolean IncludeClosedPorts, Consumer<PortResult> OnPortResult) {
         long StartTimeMs = System.currentTimeMillis();
+        String ServiceName = ServiceLookup.ResolveServiceName(PortNumber);
         try (Socket SocketArg = new Socket()) {
             SocketArg.connect(new InetSocketAddress(TargetHost, PortNumber), TimeoutMs);
             long ResponseTimeMs = System.currentTimeMillis() - StartTimeMs;
-            String ServiceName = ServiceLookup.ResolveServiceName(PortNumber);
-            OnPortResult.accept(new PortResult(PortNumber, "OPEN", ServiceName, ResponseTimeMs));
+            OnPortResult.accept(new PortResult(PortNumber, PortResult.StatusOpen, ServiceName, ResponseTimeMs));
+        } catch (SocketTimeoutException ExceptionArg) {
+            long ResponseTimeMs = System.currentTimeMillis() - StartTimeMs;
+            OnPortResult.accept(new PortResult(PortNumber, PortResult.StatusFiltered, ServiceName, ResponseTimeMs));
+        } catch (NoRouteToHostException ExceptionArg) {
+            long ResponseTimeMs = System.currentTimeMillis() - StartTimeMs;
+            OnPortResult.accept(new PortResult(PortNumber, PortResult.StatusFiltered, ServiceName, ResponseTimeMs));
+        } catch (ConnectException ExceptionArg) {
+            if (IncludeClosedPorts) {
+                long ResponseTimeMs = System.currentTimeMillis() - StartTimeMs;
+                OnPortResult.accept(new PortResult(PortNumber, PortResult.StatusClosed, ServiceName, ResponseTimeMs));
+            }
         } catch (Exception ExceptionArg) {
-            /* closed or filtered ports are not reported to keep results clean */
+            if (IncludeClosedPorts) {
+                long ResponseTimeMs = System.currentTimeMillis() - StartTimeMs;
+                OnPortResult.accept(new PortResult(PortNumber, PortResult.StatusClosed, ServiceName, ResponseTimeMs));
+            }
         }
     }
 

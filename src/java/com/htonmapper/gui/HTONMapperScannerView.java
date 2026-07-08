@@ -1,13 +1,14 @@
 package com.htonmapper.gui;
 
+import javax.swing.JCheckBox;
+import javax.swing.SwingUtilities;
+import javax.swing.border.EmptyBorder;
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.util.function.BiConsumer;
-import javax.swing.SwingUtilities;
-import javax.swing.border.EmptyBorder;
 
 public class HTONMapperScannerView extends HTONMapperPanel {
 
@@ -16,12 +17,17 @@ public class HTONMapperScannerView extends HTONMapperPanel {
     private HTONMapperTextField EndPortField;
     private HTONMapperTextField TimeoutField;
     private HTONMapperTextField ThreadCountField;
+    private JCheckBox IncludeClosedCheckbox;
     private HTONMapperButton StartButton;
     private HTONMapperButton StopButton;
     private HTONMapperProgressBar ProgressIndicator;
     private HTONMapperLabel StatusLabel;
 
-    public HTONMapperScannerView(BiConsumer<String, int[]> OnStartScan, Runnable OnStopScan) {
+    public interface ScanStartHandler {
+        void OnStart(String HostValue, int[] ParamsArg, boolean IncludeClosedPorts);
+    }
+
+    public HTONMapperScannerView(ScanStartHandler OnStartScan, Runnable OnStopScan) {
         super(new BorderLayout());
         setBorder(new EmptyBorder(24, 24, 24, 24));
 
@@ -80,12 +86,25 @@ public class HTONMapperScannerView extends HTONMapperPanel {
         AddFormRow(FormCard, ConstraintArg, 3, "Timeout (ms)", TimeoutField);
         AddFormRow(FormCard, ConstraintArg, 4, "Thread Count", ThreadCountField);
 
+        IncludeClosedCheckbox = new JCheckBox("Include closed ports in results");
+        IncludeClosedCheckbox.setFont(HTONMapperTheme.FontMono);
+        IncludeClosedCheckbox.setForeground(HTONMapperTheme.ColorTextSecondary);
+        IncludeClosedCheckbox.setBackground(HTONMapperTheme.ColorBackgroundPanel);
+        IncludeClosedCheckbox.setFocusPainted(false);
+
+        ConstraintArg.gridx = 0;
+        ConstraintArg.gridy = 5;
+        ConstraintArg.gridwidth = 2;
+        ConstraintArg.insets = new Insets(4, 10, 4, 10);
+        FormCard.add(IncludeClosedCheckbox, ConstraintArg);
+
         return FormCard;
     }
 
     private void AddFormRow(HTONMapperPanel FormCard, GridBagConstraints ConstraintArg, int RowIndex, String LabelText, HTONMapperTextField FieldArg) {
         ConstraintArg.gridx = 0;
         ConstraintArg.gridy = RowIndex;
+        ConstraintArg.gridwidth = 1;
         ConstraintArg.weightx = 0.32;
         HTONMapperLabel LabelWidget = new HTONMapperLabel(LabelText, HTONMapperTheme.ColorSoftGreen);
         LabelWidget.SetBoldStyle();
@@ -96,7 +115,7 @@ public class HTONMapperScannerView extends HTONMapperPanel {
         FormCard.add(FieldArg, ConstraintArg);
     }
 
-    private HTONMapperPanel BuildControlCard(BiConsumer<String, int[]> OnStartScan, Runnable OnStopScan) {
+    private HTONMapperPanel BuildControlCard(ScanStartHandler OnStartScan, Runnable OnStopScan) {
         HTONMapperPanel ControlCard = new HTONMapperPanel(new BorderLayout());
         ControlCard.SetCardStyle();
 
@@ -135,7 +154,7 @@ public class HTONMapperScannerView extends HTONMapperPanel {
         return SpacerPanel;
     }
 
-    private void HandleStartClicked(BiConsumer<String, int[]> OnStartScan) {
+    private void HandleStartClicked(ScanStartHandler OnStartScan) {
         try {
             String HostValue = HostInputField.getText().trim();
             int StartPortValue = Integer.parseInt(StartPortField.getText().trim());
@@ -150,7 +169,7 @@ public class HTONMapperScannerView extends HTONMapperPanel {
             }
 
             SetScanningState(true);
-            OnStartScan.accept(HostValue, new int[] { StartPortValue, EndPortValue, TimeoutValue, ThreadValue });
+            OnStartScan.OnStart(HostValue, new int[]{StartPortValue, EndPortValue, TimeoutValue, ThreadValue}, IncludeClosedCheckbox.isSelected());
         } catch (NumberFormatException ExceptionArg) {
             StatusLabel.setText("Invalid numeric input");
             StatusLabel.setForeground(HTONMapperTheme.ColorSoftRed);
@@ -174,6 +193,10 @@ public class HTONMapperScannerView extends HTONMapperPanel {
                 ProgressIndicator.ResetProgress();
             }
         });
+    }
+
+    public String GetHostInputValue() {
+        return HostInputField.getText().trim();
     }
 
     public HTONMapperProgressBar GetProgressIndicator() {
